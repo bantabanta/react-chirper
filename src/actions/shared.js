@@ -2,16 +2,7 @@ import { getInitialData } from "../utils/api";
 import { receiveUsers } from "./users";
 import { receiveTweets } from "./tweets";
 import { setAuthedUser } from "./authedUser";
-
-export const RECEIVE_DATA = "RECEIVE_DATA";
-
-// action creator
-
-function receiveData(todos, goals) {
-  return {
-    type: RECEIVE_DATA,
-  };
-}
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 const AUTHED_ID = "tylermcginnis";
 
@@ -19,10 +10,12 @@ const AUTHED_ID = "tylermcginnis";
 
 export function handleInitialData() {
   return (dispatch) => {
+    dispatch(showLoading());
     return getInitialData().then(({ users, tweets }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveTweets(tweets));
       dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(hideLoading());
     });
   };
 }
