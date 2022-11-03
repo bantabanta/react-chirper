@@ -43,18 +43,18 @@ const Tweet = (props) => {
           )}
           <p>{text}</p>
         </div>
-      </div>
-      <div className="tweet-icons">
-        <TiArrowBackOutline className="tweet-icon" />
-        <span>{replies !== 0 && replies}</span>
-        <button className="heart-button" onClick={handleLike}>
-          {hasLiked === true ? (
-            <TiHeartFullOutline color="e0245e" className="tweet-icon" />
-          ) : (
-            <TiHeartOutline className="tweet-icon" />
-          )}
-        </button>
-        <span>{likes !== 0 && likes}</span>
+        <div className="tweet-icons">
+          <TiArrowBackOutline className="tweet-icon" />
+          <span>{replies !== 0 && replies}</span>
+          <button className="heart-button" onClick={handleLike}>
+            {hasLiked === true ? (
+              <TiHeartFullOutline color="e0245e" className="tweet-icon" />
+            ) : (
+              <TiHeartOutline className="tweet-icon" />
+            )}
+          </button>
+          <span>{likes !== 0 && likes}</span>
+        </div>
       </div>
     </div>
   );
