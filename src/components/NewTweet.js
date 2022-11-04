@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { handleAddTweet } from "../actions/tweets";
+import { useNavigate } from "react-router-dom";
 
-const NewTweet = () => {
+const NewTweet = ({ dispatch, id }) => {
+  const navigate = useNavigate();
   const [text, setText] = useState("");
 
   const handleChange = (e) => {
@@ -11,10 +15,11 @@ const NewTweet = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Add this tweet to the store
-    console.log("New Tweet: ", text);
-
+    dispatch(handleAddTweet(text, id));
     setText("");
+    if (!id) {
+      navigate("/");
+    }
   };
 
   const tweetLeft = 280 - text.length;
@@ -23,7 +28,6 @@ const NewTweet = () => {
     <div className="center">
       <h3>Compose New Tweet</h3>
       <form className="new-tweet" onSubmit={handleSubmit}>
-        {/* TODO: redirect to root (/) after submit */}
         <textarea
           placeholder="What's happening!?"
           value={text}
@@ -40,4 +44,4 @@ const NewTweet = () => {
   );
 };
 
-export default NewTweet;
+export default connect()(NewTweet);
